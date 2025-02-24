@@ -98,15 +98,15 @@ End Property
 '  */
 '==============================================
 Public Function ToUpperCase() As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
     ' インプレース更新かどうかで、返すインスタンスを選択
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     ' 変換処理（VBAのUCase関数）
-    lvClass.Value = VBA.UCase(mValue)
+    lvResult.Value = VBA.UCase(mValue)
     
-    Set ToUpperCase = lvClass
+    Set ToUpperCase = lvResult
 End Function
 
 '==============================================
@@ -117,15 +117,15 @@ End Function
 '  */
 '==============================================
 Public Function ToLowerCase() As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
     ' インプレース更新の判定
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     ' 変換処理（VBAのLCase関数）
-    lvClass.Value = VBA.LCase(mValue)
+    lvResult.Value = VBA.LCase(mValue)
     
-    Set ToLowerCase = lvClass
+    Set ToLowerCase = lvResult
 End Function
 
 '==============================================
@@ -136,14 +136,14 @@ End Function
 '  */
 '==============================================
 Public Function Trim() As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     ' VBAのTrim関数で空白を除去
-    lvClass.Value = VBA.Trim(mValue)
+    lvResult.Value = VBA.Trim(mValue)
     
-    Set Trim = lvClass
+    Set Trim = lvResult
 End Function
 
 '==============================================
@@ -154,13 +154,13 @@ End Function
 '  */
 '==============================================
 Public Function TrimStart() As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
-    lvClass.Value = VBA.LTrim(mValue)
+    lvResult.Value = VBA.LTrim(mValue)
     
-    Set TrimStart = lvClass
+    Set TrimStart = lvResult
 End Function
 
 '==============================================
@@ -171,13 +171,13 @@ End Function
 '  */
 '==============================================
 Public Function TrimEnd() As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
-    lvClass.Value = VBA.RTrim(mValue)
+    lvResult.Value = VBA.RTrim(mValue)
     
-    Set TrimEnd = lvClass
+    Set TrimEnd = lvResult
 End Function
 
 '==============================================
@@ -190,9 +190,9 @@ End Function
 '  */
 '==============================================
 Public Function Slice(ByVal pStart As Long, Optional ByVal pEnd As Variant) As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     ' インデックスの正規化（負の値や範囲外を調整）
     pStart = NormalizeIndex(pStart, VBA.Len(mValue))
@@ -200,14 +200,14 @@ Public Function Slice(ByVal pStart As Long, Optional ByVal pEnd As Variant) As c
     
     ' 開始位置が終了位置を超えている場合は空の結果を返す
     If pStart > pEnd Then
-        Set Slice = lvClass
+        Set Slice = lvResult
         Exit Function
     End If
 
     ' Mid関数を使って指定部分を抽出（VBAでは1オリジンのため+1）
-    lvClass.Value = Mid(mValue, pStart + 1, pEnd - pStart)
+    lvResult.Value = Mid(mValue, pStart + 1, pEnd - pStart)
     
-    Set Slice = lvClass
+    Set Slice = lvResult
 End Function
 
 '==============================================
@@ -221,9 +221,9 @@ End Function
 '  */
 '==============================================
 Public Function Splice(ByVal pStart As Long, Optional ByVal pEnd As Variant, Optional ByVal pText As String = "") As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     ' インデックスの正規化
     pStart = NormalizeIndex(pStart, Len(mValue))
@@ -231,14 +231,14 @@ Public Function Splice(ByVal pStart As Long, Optional ByVal pEnd As Variant, Opt
     
     ' 範囲が不正な場合はそのまま返す
     If pStart > pEnd Then
-        Set Splice = lvClass
+        Set Splice = lvResult
         Exit Function
     End If
 
     ' 指定範囲をpTextで置換
-    lvClass.Value = Mid(mValue, 1, pStart) & pText & Mid(mValue, pEnd + 1)
+    lvResult.Value = Mid(mValue, 1, pStart) & pText & Mid(mValue, pEnd + 1)
     
-    Set Splice = lvClass
+    Set Splice = lvResult
 End Function
 
 '==============================================
@@ -307,14 +307,14 @@ End Function
 '  */
 '==============================================
 Public Function Replace(ByVal pFindText As String, ByVal pReplaceText As String) As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     ' VBAのReplace関数で、1回だけ置換を実施
-    lvClass.Value = VBA.Replace(mValue, pFindText, pReplaceText, 1, 1)
+    lvResult.Value = VBA.Replace(mValue, pFindText, pReplaceText, 1, 1)
     
-    Set Replace = lvClass
+    Set Replace = lvResult
 End Function
 
 '==============================================
@@ -327,14 +327,14 @@ End Function
 '  */
 '==============================================
 Public Function ReplaceAll(ByVal pFindText As String, ByVal pReplaceText As String) As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     ' VBAのReplace関数で、全ての一致部分を置換
-    lvClass.Value = VBA.Replace(mValue, pFindText, pReplaceText)
+    lvResult.Value = VBA.Replace(mValue, pFindText, pReplaceText)
     
-    Set ReplaceAll = lvClass
+    Set ReplaceAll = lvResult
 End Function
 
 '==============================================
@@ -361,12 +361,12 @@ End Function
 Public Function PadStart(ByVal pLength As Long, Optional ByVal pPadString As String = " ") As clsEnhancedString
     Dim lvPadCount As Long
     Dim lvRepeat As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
     ' パディング用のクラスインスタンスを生成
     Set lvRepeat = New clsEnhancedString
     
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     ' パディング文字が空文字の場合はスペースを利用
     If Len(pPadString) = 0 Then
@@ -377,9 +377,9 @@ Public Function PadStart(ByVal pLength As Long, Optional ByVal pPadString As Str
     lvPadCount = Ceil((pLength - Len(mValue)) / Len(pPadString))
     lvRepeat.Value = pPadString
     ' 指定回数分繰り返したパディング文字列を生成し、余分な部分をSliceで調整して先頭に連結
-    lvClass.Value = lvRepeat.Repeat(lvPadCount).Slice(0, pLength - Len(mValue)) & mValue
+    lvResult.Value = lvRepeat.Repeat(lvPadCount).Slice(0, pLength - Len(mValue)) & mValue
     
-    Set PadStart = lvClass
+    Set PadStart = lvResult
 End Function
 
 '==============================================
@@ -394,10 +394,10 @@ End Function
 Public Function PadEnd(ByVal pLength As Long, Optional ByVal pPadString As String = " ") As clsEnhancedString
     Dim lvPadCount As Long
     Dim lvRepeat As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
     Set lvRepeat = New clsEnhancedString
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     ' パディング文字が空文字の場合はスペースを利用
     If Len(pPadString) = 0 Then
@@ -407,9 +407,9 @@ Public Function PadEnd(ByVal pLength As Long, Optional ByVal pPadString As Strin
     lvPadCount = Ceil((pLength - Len(mValue)) / Len(pPadString))
     lvRepeat.Value = pPadString
     ' 元の文字列に対して、必要なパディングを追加（余分な部分はSliceで調整）
-    lvClass.Value = mValue & lvRepeat.Repeat(lvPadCount).Slice(0, pLength - Len(mValue))
+    lvResult.Value = mValue & lvRepeat.Repeat(lvPadCount).Slice(0, pLength - Len(mValue))
     
-    Set PadEnd = lvClass
+    Set PadEnd = lvResult
 End Function
 
 '==============================================
@@ -428,21 +428,21 @@ Public Function Repeat(ByVal pCount As Long) As clsEnhancedString
     End If
     
     Dim lvItems() As Variant
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     Dim i As Long
     
     ReDim lvItems(0 To pCount - 1)
     
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     ' 配列に同じ文字列を格納してJoinで連結する
     For i = 0 To pCount - 1
         lvItems(i) = mValue
     Next i
     
-    lvClass.Value = VBA.Join(lvItems, "")
+    lvResult.Value = VBA.Join(lvItems, "")
     
-    Set Repeat = lvClass
+    Set Repeat = lvResult
 End Function
 
 '==============================================
@@ -454,18 +454,18 @@ End Function
 '  */
 '==============================================
 Public Function Template(ParamArray pTexts() As Variant) As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     Dim i As Long
     
-    Set lvClass = GetInstance
-    lvClass.Value = mValue
+    Set lvResult = GetInstance
+    lvResult.Value = mValue
     
     ' {0}, {1}, ... の形式でプレースホルダーを置換
     For i = LBound(pTexts) To UBound(pTexts)
-        lvClass.Value = VBA.Replace(lvClass.Value, "{" & i & "}", CStr(pTexts(i)))
+        lvResult.Value = VBA.Replace(lvResult.Value, "{" & i & "}", CStr(pTexts(i)))
     Next i
     
-    Set Template = lvClass
+    Set Template = lvResult
 End Function
 
 '==============================================
@@ -476,15 +476,15 @@ End Function
 '  */
 '==============================================
 Public Function Reverse() As clsEnhancedString
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     Dim i As Long
     
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     ' VBAのStrReverse関数を使用
-    lvClass.Value = VBA.StrReverse(mValue)
+    lvResult.Value = VBA.StrReverse(mValue)
     
-    Set Reverse = lvClass
+    Set Reverse = lvResult
 End Function
 
 '==============================================
@@ -524,10 +524,10 @@ End Function
 '==============================================
 Public Function ReplaceRegex(ByVal pPattern As String, ByVal pReplacement As String, Optional ByVal pIgnoreCase As Boolean = True, Optional ByVal pGlobal As Boolean = True) As clsEnhancedString
     Dim lvRegExp As Object
-    Dim lvClass As clsEnhancedString
+    Dim lvResult As clsEnhancedString
     
     Set lvRegExp = CreateObject("VBScript.RegExp")
-    Set lvClass = GetInstance
+    Set lvResult = GetInstance
     
     With lvRegExp
         .Pattern = pPattern
@@ -536,9 +536,9 @@ Public Function ReplaceRegex(ByVal pPattern As String, ByVal pReplacement As Str
     End With
     
     ' 正規表現を使って置換
-    lvClass.Value = lvRegExp.Replace(mValue, pReplacement)
+    lvResult.Value = lvRegExp.Replace(mValue, pReplacement)
     
-    Set ReplaceRegex = lvClass
+    Set ReplaceRegex = lvResult
 End Function
 
 '==============================================
