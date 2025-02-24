@@ -9,50 +9,94 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-' ----- Private Member Variables -----
+'==============================================
+' /**
+'  * クラス clsEnhancedString
+'  * 文字列操作のための拡張機能を提供するクラス
+'  */
+'==============================================
+
 ' 内部で保持する文字列の変数
 Private mValue As String
 ' メソッド呼び出し時にインプレース更新するか、新規インスタンスを生成するかのフラグ
 Private mInPlaceUpdate As Boolean
 
-' ----- Class LifeCycle Methods -----
-' クラスの初期化処理
+'==============================================
+' /**
+'  * クラスの初期化処理（コンストラクタ）
+'  *
+'  * @constructor
+'  */
+'==============================================
 Private Sub Class_Initialize()
     mValue = ""   ' 初期値を空文字列に設定
     mInPlaceUpdate = False
 End Sub
 
-' クラス終了時の後処理（ここでは文字列をクリア）
-Private Sub Class_Terminate()
-    mValue = ""
-End Sub
-
-' ----- Public Properties and Methods -----
-' プロパティ Get/Let と外部利用可能な各種文字列操作メソッド
-
-' 外部から初期テキストとインプレース更新フラグを設定するメソッド
+'==============================================
+' /**
+'  * インスタンスの初期化を行う
+'  *
+'  * @param {String} pInitialText - 初期テキスト
+'  * @param {Boolean} [pInPlaceUpdate=false] - インプレース更新フラグ（既存インスタンス更新の場合はTrue）
+'  */
+'==============================================
 Public Sub Initialize(ByVal pInitialText As String, Optional ByVal pInPlaceUpdate As Boolean = False)
     mValue = pInitialText
     mInPlaceUpdate = pInPlaceUpdate
 End Sub
 
-' プロパティ Get: 現在の文字列の値を返す
+'==============================================
+' /**
+'  * クラス終了時の後処理（デストラクタ）
+'  * 文字列をクリアする
+'  */
+'==============================================
+Private Sub Class_Terminate()
+    mValue = ""
+End Sub
+
+'==============================================
+' /**
+'  * 現在の文字列の値を取得するプロパティ
+'  *
+'  * @return {String} 現在の文字列
+'  */
+'==============================================
 Public Property Get Value() As String
 Attribute Value.VB_UserMemId = 0
     Value = mValue
 End Property
 
-' プロパティ Let: 文字列の値を更新する
+'==============================================
+' /**
+'  * 文字列の値を設定するプロパティ
+'  *
+'  * @param {String} pNewText - 新しい文字列
+'  */
+'==============================================
 Public Property Let Value(ByVal pNewText As String)
     mValue = pNewText
 End Property
 
-' プロパティ Get: 文字列の長さ（文字数）を返す
+'==============================================
+' /**
+'  * 文字列の長さ（文字数）を返すプロパティ
+'  *
+'  * @return {Long} 文字列の長さ
+'  */
+'==============================================
 Public Property Get Length() As Long
     Length = VBA.Len(mValue)
 End Property
 
-' メソッド: 文字列を大文字に変換する
+'==============================================
+' /**
+'  * 文字列を大文字に変換する
+'  *
+'  * @return {clsEnhancedString} 変換後の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function ToUpperCase() As clsEnhancedString
     Dim lvClass As clsEnhancedString
     
@@ -65,7 +109,13 @@ Public Function ToUpperCase() As clsEnhancedString
     Set ToUpperCase = lvClass
 End Function
 
-' メソッド: 文字列を小文字に変換する
+'==============================================
+' /**
+'  * 文字列を小文字に変換する
+'  *
+'  * @return {clsEnhancedString} 変換後の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function ToLowerCase() As clsEnhancedString
     Dim lvClass As clsEnhancedString
     
@@ -78,7 +128,13 @@ Public Function ToLowerCase() As clsEnhancedString
     Set ToLowerCase = lvClass
 End Function
 
-' メソッド: 文字列の前後の空白を除去する（Trim）
+'==============================================
+' /**
+'  * 文字列の前後の空白を除去する（Trim）
+'  *
+'  * @return {clsEnhancedString} トリム後の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function Trim() As clsEnhancedString
     Dim lvClass As clsEnhancedString
     
@@ -90,7 +146,13 @@ Public Function Trim() As clsEnhancedString
     Set Trim = lvClass
 End Function
 
-' メソッド: 文字列の先頭の空白を除去する（LTrim）
+'==============================================
+' /**
+'  * 文字列の先頭の空白を除去する（LTrim）
+'  *
+'  * @return {clsEnhancedString} 先頭トリム後の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function TrimStart() As clsEnhancedString
     Dim lvClass As clsEnhancedString
     
@@ -101,7 +163,13 @@ Public Function TrimStart() As clsEnhancedString
     Set TrimStart = lvClass
 End Function
 
-' メソッド: 文字列の末尾の空白を除去する（RTrim）
+'==============================================
+' /**
+'  * 文字列の末尾の空白を除去する（RTrim）
+'  *
+'  * @return {clsEnhancedString} 末尾トリム後の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function TrimEnd() As clsEnhancedString
     Dim lvClass As clsEnhancedString
     
@@ -112,7 +180,15 @@ Public Function TrimEnd() As clsEnhancedString
     Set TrimEnd = lvClass
 End Function
 
-' メソッド: 文字列の一部を抽出する（Slice）
+'==============================================
+' /**
+'  * 文字列の一部を抽出する（Slice）
+'  *
+'  * @param {Long} pStart - 開始インデックス（0オリジン）
+'  * @param {Variant} [pEnd] - 終了インデックス（省略時は文字列末尾）
+'  * @return {clsEnhancedString} 抽出された文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function Slice(ByVal pStart As Long, Optional ByVal pEnd As Variant) As clsEnhancedString
     Dim lvClass As clsEnhancedString
     
@@ -134,7 +210,16 @@ Public Function Slice(ByVal pStart As Long, Optional ByVal pEnd As Variant) As c
     Set Slice = lvClass
 End Function
 
-' メソッド: 文字列の一部を置換または削除する（Splice）
+'==============================================
+' /**
+'  * 文字列の一部を置換または削除する（Splice）
+'  *
+'  * @param {Long} pStart - 置換開始インデックス（0オリジン）
+'  * @param {Variant} [pEnd] - 置換終了インデックス（省略時は文字列末尾）
+'  * @param {String} [pText=""] - 置換後の文字列（空文字の場合は削除）
+'  * @return {clsEnhancedString} 置換結果の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function Splice(ByVal pStart As Long, Optional ByVal pEnd As Variant, Optional ByVal pText As String = "") As clsEnhancedString
     Dim lvClass As clsEnhancedString
     
@@ -156,17 +241,38 @@ Public Function Splice(ByVal pStart As Long, Optional ByVal pEnd As Variant, Opt
     Set Splice = lvClass
 End Function
 
-' メソッド: 指定した文字列が含まれているかを確認する
+'==============================================
+' /**
+'  * 指定した文字列が含まれているかを確認する
+'  *
+'  * @param {String} pFindText - 検索する文字列
+'  * @return {Boolean} 含まれていればTrue、含まれていなければFalse
+'  */
+'==============================================
 Public Function Includes(ByVal pFindText As String) As Boolean
     Includes = (InStr(1, mValue, pFindText, vbTextCompare) > 0)
 End Function
 
-' メソッド: 指定した文字列の位置を返す（0オリジン）
+'==============================================
+' /**
+'  * 指定した文字列の位置を返す（0オリジン）
+'  *
+'  * @param {String} pFindText - 検索する文字列
+'  * @return {Long} 検索文字列の開始位置（0オリジン）。見つからなければ -1 を返す
+'  */
+'==============================================
 Public Function IndexOf(ByVal pFindText As String) As Long
     IndexOf = InStr(1, mValue, pFindText, vbTextCompare) - 1
 End Function
 
-' メソッド: 文字列が指定した文字列で始まるかを判定する
+'==============================================
+' /**
+'  * 文字列が指定した文字列で始まるかを判定する
+'  *
+'  * @param {String} pFindText - 判定に使用する文字列
+'  * @return {Boolean} 指定した文字列で始まる場合はTrue、そうでなければFalse
+'  */
+'==============================================
 Public Function StartsWith(ByVal pFindText As String) As Boolean
     If Len(pFindText) > Len(mValue) Then
         StartsWith = False
@@ -175,7 +281,14 @@ Public Function StartsWith(ByVal pFindText As String) As Boolean
     End If
 End Function
 
-' メソッド: 文字列が指定した文字列で終わるかを判定する
+'==============================================
+' /**
+'  * 文字列が指定した文字列で終わるかを判定する
+'  *
+'  * @param {String} pFindText - 判定に使用する文字列
+'  * @return {Boolean} 指定した文字列で終わる場合はTrue、そうでなければFalse
+'  */
+'==============================================
 Public Function EndsWith(ByVal pFindText As String) As Boolean
     If Len(pFindText) > Len(mValue) Then
         EndsWith = False
@@ -184,7 +297,15 @@ Public Function EndsWith(ByVal pFindText As String) As Boolean
     End If
 End Function
 
-' メソッド: 最初に見つかった指定文字列を置換する
+'==============================================
+' /**
+'  * 最初に見つかった指定文字列を置換する
+'  *
+'  * @param {String} pFindText - 置換対象の文字列
+'  * @param {String} pReplaceText - 置換後の文字列
+'  * @return {clsEnhancedString} 置換結果の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function Replace(ByVal pFindText As String, ByVal pReplaceText As String) As clsEnhancedString
     Dim lvClass As clsEnhancedString
     
@@ -196,7 +317,15 @@ Public Function Replace(ByVal pFindText As String, ByVal pReplaceText As String)
     Set Replace = lvClass
 End Function
 
-' メソッド: 全ての一致する指定文字列を置換する
+'==============================================
+' /**
+'  * 全ての一致する指定文字列を置換する
+'  *
+'  * @param {String} pFindText - 置換対象の文字列
+'  * @param {String} pReplaceText - 置換後の文字列
+'  * @return {clsEnhancedString} 置換結果の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function ReplaceAll(ByVal pFindText As String, ByVal pReplaceText As String) As clsEnhancedString
     Dim lvClass As clsEnhancedString
     
@@ -208,12 +337,27 @@ Public Function ReplaceAll(ByVal pFindText As String, ByVal pReplaceText As Stri
     Set ReplaceAll = lvClass
 End Function
 
-' メソッド: 指定したデリミタで文字列を分割して配列を返す
+'==============================================
+' /**
+'  * 指定したデリミタで文字列を分割して配列を返す
+'  *
+'  * @param {String} pDelimiter - 分割に使用する区切り文字
+'  * @return {Variant} 分割された文字列の配列
+'  */
+'==============================================
 Public Function Split(ByVal pDelimiter As String) As Variant
     Split = VBA.Split(mValue, pDelimiter)
 End Function
 
-' メソッド: 指定した長さになるよう、前方にパディング文字を追加する
+'==============================================
+' /**
+'  * 指定した長さになるよう、前方にパディング文字を追加する
+'  *
+'  * @param {Long} pLength - 最終的な文字列の長さ
+'  * @param {String} [pPadString=" "] - パディングに使用する文字列
+'  * @return {clsEnhancedString} パディング後の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function PadStart(ByVal pLength As Long, Optional ByVal pPadString As String = " ") As clsEnhancedString
     Dim lvPadCount As Long
     Dim lvRepeat As clsEnhancedString
@@ -238,14 +382,21 @@ Public Function PadStart(ByVal pLength As Long, Optional ByVal pPadString As Str
     Set PadStart = lvClass
 End Function
 
-' メソッド: 指定した長さになるよう、後方にパディング文字を追加する
+'==============================================
+' /**
+'  * 指定した長さになるよう、後方にパディング文字を追加する
+'  *
+'  * @param {Long} pLength - 最終的な文字列の長さ
+'  * @param {String} [pPadString=" "] - パディングに使用する文字列
+'  * @return {clsEnhancedString} パディング後の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function PadEnd(ByVal pLength As Long, Optional ByVal pPadString As String = " ") As clsEnhancedString
     Dim lvPadCount As Long
     Dim lvRepeat As clsEnhancedString
     Dim lvClass As clsEnhancedString
     
     Set lvRepeat = New clsEnhancedString
-    
     Set lvClass = GetInstance
     
     ' パディング文字が空文字の場合はスペースを利用
@@ -261,7 +412,15 @@ Public Function PadEnd(ByVal pLength As Long, Optional ByVal pPadString As Strin
     Set PadEnd = lvClass
 End Function
 
-' メソッド: 現在の文字列を指定回数繰り返す
+'==============================================
+' /**
+'  * 現在の文字列を指定回数繰り返す
+'  *
+'  * @param {Long} pCount - 繰り返す回数（負の値はエラー）
+'  * @return {clsEnhancedString} 繰り返し後の文字列を保持するインスタンス
+'  * @throws エラー番号 9（pCountが負の場合）
+'  */
+'==============================================
 Public Function Repeat(ByVal pCount As Long) As clsEnhancedString
     ' 負の回数の場合はエラーを発生させる
     If pCount < 0 Then
@@ -286,13 +445,19 @@ Public Function Repeat(ByVal pCount As Long) As clsEnhancedString
     Set Repeat = lvClass
 End Function
 
-' メソッド: テンプレート文字列内のプレースホルダーを指定の引数で置換する
+'==============================================
+' /**
+'  * テンプレート文字列内のプレースホルダーを指定の引数で置換する
+'  *
+'  * @param {...Variant} pTexts - プレースホルダーに置換する引数群（{0}, {1}, ...）
+'  * @return {clsEnhancedString} 置換後の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function Template(ParamArray pTexts() As Variant) As clsEnhancedString
     Dim lvClass As clsEnhancedString
     Dim i As Long
     
     Set lvClass = GetInstance
-    
     lvClass.Value = mValue
     
     ' {0}, {1}, ... の形式でプレースホルダーを置換
@@ -303,7 +468,13 @@ Public Function Template(ParamArray pTexts() As Variant) As clsEnhancedString
     Set Template = lvClass
 End Function
 
-' メソッド: 文字列を逆順にする
+'==============================================
+' /**
+'  * 文字列を逆順にする
+'  *
+'  * @return {clsEnhancedString} 逆順にされた文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function Reverse() As clsEnhancedString
     Dim lvClass As clsEnhancedString
     Dim i As Long
@@ -316,7 +487,15 @@ Public Function Reverse() As clsEnhancedString
     Set Reverse = lvClass
 End Function
 
-' メソッド: 正規表現パターンに対してマッチするかテストする
+'==============================================
+' /**
+'  * 正規表現パターンに対してマッチするかテストする
+'  *
+'  * @param {String} pPattern - 正規表現パターン
+'  * @param {Boolean} [pIgnoreCase=true] - 大文字小文字の区別を無視するかどうか
+'  * @return {Boolean} パターンにマッチすればTrue、そうでなければFalse
+'  */
+'==============================================
 Public Function Test(ByVal pPattern As String, Optional ByVal pIgnoreCase As Boolean = True) As Boolean
     Dim lvRegExp As Object
     
@@ -332,13 +511,22 @@ Public Function Test(ByVal pPattern As String, Optional ByVal pIgnoreCase As Boo
     Test = lvRegExp.Test(mValue)
 End Function
 
-' メソッド: 正規表現による置換を実施する
+'==============================================
+' /**
+'  * 正規表現による置換を実施する
+'  *
+'  * @param {String} pPattern - 正規表現パターン
+'  * @param {String} pReplacement - 置換後の文字列
+'  * @param {Boolean} [pIgnoreCase=true] - 大文字小文字の区別を無視するかどうか
+'  * @param {Boolean} [pGlobal=true] - 全体で置換するかどうか
+'  * @return {clsEnhancedString} 置換後の文字列を保持するインスタンス
+'  */
+'==============================================
 Public Function ReplaceRegex(ByVal pPattern As String, ByVal pReplacement As String, Optional ByVal pIgnoreCase As Boolean = True, Optional ByVal pGlobal As Boolean = True) As clsEnhancedString
     Dim lvRegExp As Object
     Dim lvClass As clsEnhancedString
     
     Set lvRegExp = CreateObject("VBScript.RegExp")
-    
     Set lvClass = GetInstance
     
     With lvRegExp
@@ -353,7 +541,16 @@ Public Function ReplaceRegex(ByVal pPattern As String, ByVal pReplacement As Str
     Set ReplaceRegex = lvClass
 End Function
 
-' メソッド: 正規表現にマッチする部分を取得する
+'==============================================
+' /**
+'  * 正規表現にマッチする部分を取得する
+'  *
+'  * @param {String} pPattern - 正規表現パターン
+'  * @param {Boolean} [pIgnoreCase=true] - 大文字小文字の区別を無視するかどうか
+'  * @param {Boolean} [pGlobal=true] - 全体で検索するかどうか
+'  * @return {Object} マッチした部分のコレクション（VBScript.RegExpの結果）
+'  */
+'==============================================
 Public Function Match(ByVal pPattern As String, Optional ByVal pIgnoreCase As Boolean = True, Optional ByVal pGlobal As Boolean = True) As Object
     Dim lvRegExp As Object
     Dim i As Long
@@ -370,10 +567,16 @@ Public Function Match(ByVal pPattern As String, Optional ByVal pIgnoreCase As Bo
     Set Match = lvRegExp.Execute(mValue)
 End Function
 
-' ----- Private Helper Methods -----
-' 内部処理用の補助メソッド
-
-' プライベートメソッド: 数値を切り上げする（Ceiling関数）
+'==============================================
+' /**
+'  * 数値を切り上げする（Ceiling関数）
+'  *
+'  * @private
+'  * @param {Double} pNumber - 対象の数値
+'  * @param {Double} [pSignificance=1] - 切り上げの単位
+'  * @return {Double} 切り上げ後の数値
+'  */
+'==============================================
 Private Function Ceil(ByVal pNumber As Double, Optional ByVal pSignificance As Double = 1) As Double
     If pSignificance = 0 Then
         Ceil = pNumber
@@ -383,7 +586,16 @@ Private Function Ceil(ByVal pNumber As Double, Optional ByVal pSignificance As D
     End If
 End Function
 
-' プライベートメソッド: インデックスを正規化する
+'==============================================
+' /**
+'  * インデックスを正規化する
+'  *
+'  * @private
+'  * @param {Long} pIndex - 元のインデックス（0オリジン）
+'  * @param {Long} pFullLength - 文字列の全長
+'  * @return {Long} 正規化されたインデックス
+'  */
+'==============================================
 Private Function NormalizeIndex(ByVal pIndex As Long, ByVal pFullLength As Long) As Long
     ' 負のインデックスは文字列長を加算して正のインデックスに変換
     If pIndex < 0 Then
@@ -402,7 +614,16 @@ Private Function NormalizeIndex(ByVal pIndex As Long, ByVal pFullLength As Long)
     NormalizeIndex = pIndex
 End Function
 
-' プライベートメソッド: 終了インデックス（省略時は文字列末尾）を正規化する
+'==============================================
+' /**
+'  * 終了インデックス（省略時は文字列末尾）を正規化する
+'  *
+'  * @private
+'  * @param {Variant} pEnd - 終了インデックスまたは省略値
+'  * @param {Long} pFullLength - 文字列の全長
+'  * @return {Long} 正規化された終了インデックス
+'  */
+'==============================================
 Private Function NormalizeOptionalEnd(ByVal pEnd As Variant, ByVal pFullLength As Long) As Long
     If IsMissing(pEnd) Or Not IsNumeric(pEnd) Then
         NormalizeOptionalEnd = pFullLength
@@ -411,7 +632,14 @@ Private Function NormalizeOptionalEnd(ByVal pEnd As Variant, ByVal pFullLength A
     End If
 End Function
 
-' プライベートメソッド: pInPlaceUpdate の値に応じたインスタンスを返す
+'==============================================
+' /**
+'  * pInPlaceUpdate の値に応じたインスタンスを返す
+'  *
+'  * @private
+'  * @return {clsEnhancedString} インプレース更新の場合は現在のインスタンス、そうでなければ新規インスタンス
+'  */
+'==============================================
 Private Function GetInstance() As clsEnhancedString
     If mInPlaceUpdate Then
         ' インプレース更新の場合、現在のインスタンスを返す
@@ -421,4 +649,3 @@ Private Function GetInstance() As clsEnhancedString
         Set GetInstance = New clsEnhancedString
     End If
 End Function
-

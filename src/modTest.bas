@@ -1,7 +1,15 @@
 Attribute VB_Name = "modTest"
 Option Explicit
 
-' clsEnhancedString のテストモジュール
+'==============================================
+' /**
+'  * Test_clsEnhancedString
+'  * 
+'  * clsEnhancedString クラスの全テストを実行する
+'  *
+'  * @function Test_clsEnhancedString
+'  */
+'==============================================
 Public Sub Test_clsEnhancedString()
     Call Test_clsEnhancedString_Initialize
     Call Test_clsEnhancedString_Value
@@ -31,7 +39,17 @@ Public Sub Test_clsEnhancedString()
     Call Test_clsEnhancedString_InPlaceUpdate
 End Sub
 
-' 初期化のテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Initialize
+'  * 
+'  * 初期化処理のテスト。
+'  * インスタンス生成時に Value プロパティが空文字であること、及び
+'  * Initialize メソッドで値が設定されることを確認する。
+'  *
+'  * @function Test_clsEnhancedString_Initialize
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Initialize()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -44,7 +62,15 @@ Private Sub Test_clsEnhancedString_Initialize()
     Set lvStr = Nothing
 End Sub
 
-' Value プロパティのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Value
+'  * 
+'  * Value プロパティの設定と取得のテスト。
+'  *
+'  * @function Test_clsEnhancedString_Value
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Value()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -55,7 +81,15 @@ Private Sub Test_clsEnhancedString_Value()
     Set lvStr = Nothing
 End Sub
 
-' Length プロパティのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Length
+'  * 
+'  * Length プロパティが文字列の長さを正しく返すかテストする。
+'  *
+'  * @function Test_clsEnhancedString_Length
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Length()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -69,7 +103,15 @@ Private Sub Test_clsEnhancedString_Length()
     Set lvStr = Nothing
 End Sub
 
-' ToUpperCase メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_ToUpperCase
+'  * 
+'  * ToUpperCase メソッドが文字列を大文字に変換するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_ToUpperCase
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_ToUpperCase()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -80,7 +122,15 @@ Private Sub Test_clsEnhancedString_ToUpperCase()
     Set lvStr = Nothing
 End Sub
 
-' ToLowerCase メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_ToLowerCase
+'  * 
+'  * ToLowerCase メソッドが文字列を小文字に変換するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_ToLowerCase
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_ToLowerCase()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -91,7 +141,15 @@ Private Sub Test_clsEnhancedString_ToLowerCase()
     Set lvStr = Nothing
 End Sub
 
-' Trim メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Trim
+'  * 
+'  * Trim メソッドが前後の空白を正しく除去するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_Trim
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Trim()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -102,7 +160,15 @@ Private Sub Test_clsEnhancedString_Trim()
     Set lvStr = Nothing
 End Sub
 
-' TrimStart メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_TrimStart
+'  * 
+'  * TrimStart メソッドが先頭の空白を正しく除去するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_TrimStart
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_TrimStart()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -113,7 +179,15 @@ Private Sub Test_clsEnhancedString_TrimStart()
     Set lvStr = Nothing
 End Sub
 
-' TrimEnd メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_TrimEnd
+'  * 
+'  * TrimEnd メソッドが末尾の空白を正しく除去するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_TrimEnd
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_TrimEnd()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -124,7 +198,15 @@ Private Sub Test_clsEnhancedString_TrimEnd()
     Set lvStr = Nothing
 End Sub
 
-' Slice メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Slice
+'  * 
+'  * Slice メソッドが指定された範囲の文字列を正しく抽出するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_Slice
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Slice()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -135,7 +217,15 @@ Private Sub Test_clsEnhancedString_Slice()
     Set lvStr = Nothing
 End Sub
 
-' Splice メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Splice
+'  * 
+'  * Splice メソッドが指定範囲の文字列を正しく置換または削除するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_Splice
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Splice()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -146,7 +236,15 @@ Private Sub Test_clsEnhancedString_Splice()
     Set lvStr = Nothing
 End Sub
 
-' Includes メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Includes
+'  * 
+'  * Includes メソッドが指定文字列の存在を正しく判定するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_Includes
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Includes()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -158,7 +256,15 @@ Private Sub Test_clsEnhancedString_Includes()
     Set lvStr = Nothing
 End Sub
 
-' IndexOf メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_IndexOf
+'  * 
+'  * IndexOf メソッドが指定文字列の位置（0オリジン）を正しく返すかテストする。
+'  *
+'  * @function Test_clsEnhancedString_IndexOf
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_IndexOf()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -170,7 +276,15 @@ Private Sub Test_clsEnhancedString_IndexOf()
     Set lvStr = Nothing
 End Sub
 
-' StartsWith メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_StartsWith
+'  * 
+'  * StartsWith メソッドが文字列の先頭一致を正しく判定するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_StartsWith
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_StartsWith()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -182,7 +296,15 @@ Private Sub Test_clsEnhancedString_StartsWith()
     Set lvStr = Nothing
 End Sub
 
-' EndsWith メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_EndsWith
+'  * 
+'  * EndsWith メソッドが文字列の末尾一致を正しく判定するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_EndsWith
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_EndsWith()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -194,7 +316,15 @@ Private Sub Test_clsEnhancedString_EndsWith()
     Set lvStr = Nothing
 End Sub
 
-' Replace メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Replace
+'  * 
+'  * Replace メソッドが文字列内の最初の一致を正しく置換するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_Replace
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Replace()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -205,7 +335,15 @@ Private Sub Test_clsEnhancedString_Replace()
     Set lvStr = Nothing
 End Sub
 
-' ReplaceAll メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_ReplaceAll
+'  * 
+'  * ReplaceAll メソッドが文字列内の全一致部分を正しく置換するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_ReplaceAll
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_ReplaceAll()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -216,7 +354,15 @@ Private Sub Test_clsEnhancedString_ReplaceAll()
     Set lvStr = Nothing
 End Sub
 
-' Split メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Split
+'  * 
+'  * Split メソッドが指定デリミタで文字列を分割できるかテストする。
+'  *
+'  * @function Test_clsEnhancedString_Split
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Split()
     Dim lvStr As clsEnhancedString
     Dim lvResult As Variant
@@ -232,7 +378,15 @@ Private Sub Test_clsEnhancedString_Split()
     Set lvStr = Nothing
 End Sub
 
-' PadStart メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_PadStart
+'  * 
+'  * PadStart メソッドが文字列の先頭に指定文字でパディングできるかテストする。
+'  *
+'  * @function Test_clsEnhancedString_PadStart
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_PadStart()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -243,7 +397,15 @@ Private Sub Test_clsEnhancedString_PadStart()
     Set lvStr = Nothing
 End Sub
 
-' PadEnd メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_PadEnd
+'  * 
+'  * PadEnd メソッドが文字列の末尾に指定文字でパディングできるかテストする。
+'  *
+'  * @function Test_clsEnhancedString_PadEnd
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_PadEnd()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -254,7 +416,15 @@ Private Sub Test_clsEnhancedString_PadEnd()
     Set lvStr = Nothing
 End Sub
 
-' Repeat メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Repeat
+'  * 
+'  * Repeat メソッドが文字列を指定回数繰り返すかテストする。
+'  *
+'  * @function Test_clsEnhancedString_Repeat
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Repeat()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -265,7 +435,15 @@ Private Sub Test_clsEnhancedString_Repeat()
     Set lvStr = Nothing
 End Sub
 
-' Template メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Template
+'  * 
+'  * Template メソッドがテンプレート内のプレースホルダーを正しく置換するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_Template
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Template()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -276,7 +454,15 @@ Private Sub Test_clsEnhancedString_Template()
     Set lvStr = Nothing
 End Sub
 
-' Reverse メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Reverse
+'  * 
+'  * Reverse メソッドが文字列を逆順に変換するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_Reverse
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Reverse()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -287,7 +473,15 @@ Private Sub Test_clsEnhancedString_Reverse()
     Set lvStr = Nothing
 End Sub
 
-' Test メソッドのテスト（正規表現）
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Test
+'  * 
+'  * Test メソッドが正規表現で文字列をテストできるか確認する。
+'  *
+'  * @function Test_clsEnhancedString_Test
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Test()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -299,7 +493,15 @@ Private Sub Test_clsEnhancedString_Test()
     Set lvStr = Nothing
 End Sub
 
-' ReplaceRegex メソッドのテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_ReplaceRegex
+'  * 
+'  * ReplaceRegex メソッドが正規表現による置換を正しく実施するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_ReplaceRegex
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_ReplaceRegex()
     Dim lvStr As clsEnhancedString
     Set lvStr = New clsEnhancedString
@@ -310,7 +512,15 @@ Private Sub Test_clsEnhancedString_ReplaceRegex()
     Set lvStr = Nothing
 End Sub
 
-' Match メソッドのテスト（正規表現）
+'==============================================
+' /**
+'  * Test_clsEnhancedString_Match
+'  * 
+'  * Match メソッドが正規表現でマッチした部分を正しく取得するかテストする。
+'  *
+'  * @function Test_clsEnhancedString_Match
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_Match()
     Dim lvStr As clsEnhancedString
     Dim lvMatches As Object
@@ -327,7 +537,17 @@ Private Sub Test_clsEnhancedString_Match()
     Set lvStr = Nothing
 End Sub
 
-' mInPlaceUpdate のテスト
+'==============================================
+' /**
+'  * Test_clsEnhancedString_InPlaceUpdate
+'  * 
+'  * mInPlaceUpdate フラグが正しく動作するかテストする。
+'  * インプレース更新が False の場合は元のインスタンスは更新されず、
+'  * True の場合は元のインスタンスが更新されることを確認する。
+'  *
+'  * @function Test_clsEnhancedString_InPlaceUpdate
+'  */
+'==============================================
 Private Sub Test_clsEnhancedString_InPlaceUpdate()
     Dim lvStr As clsEnhancedString
     Dim lvResult As clsEnhancedString
